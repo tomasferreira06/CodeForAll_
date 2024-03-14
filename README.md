@@ -1,2 +1,2 @@
 # CodeForAll
-Contents related to the course.
+Contents related to the course!
