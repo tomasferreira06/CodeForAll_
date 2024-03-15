@@ -14,4 +14,4 @@ time=$(date +%T)
 
 # Copying the file to current directory and appending date and time
 
-cp /var/log/lastlog ./lastlog$year$month$day$time  
+cp /var/log/lastlog ./lastlog$year.$month.$day.$time 
