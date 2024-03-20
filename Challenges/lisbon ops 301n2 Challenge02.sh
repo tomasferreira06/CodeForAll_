@@ -14,24 +14,23 @@ read -p "Enter permissions number (ex.777): " permissions
 #Changing directory to the one specified by user
 #In case the directory can't be found the script exits with a message and a general error
 
-cd "$directory_path" || { echo "Directory not found"; exit 1; }
+cd "$directory_path" ||{ echo "Directory not found"; exit 1; }
 
 #Used the find command to search for file type of type "f" so that only normal files are changed and not directories
 
 find . -type f -exec chmod "$permissions" {} +
-
-#Print to the screen the contents of the directory to show the changes to the permissions
-
-echo "Directory Contents:"
-
-ls -l
 
 #Outputting to the screen the actions of the script while changing the permissions of each file
 
 find . -type f | while read -r file ; do 
     echo "Changing permissions for file: $file"
     chmod "$permissions" "$file"
-    sleep 0.55
+    sleep 1
 done
 
+#Print to the screen the contents of the directory to show the changes to the permissions
+
+echo "Directory Contents:"
+
+ls -l
 
