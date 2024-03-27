@@ -7,7 +7,7 @@ echo "1. Hello World!"
 echo "2. Ping Self."
 echo "3. IP Info."
 echo "4. Exit."
-
+ 
 read -p "Please choose an option:" option
 
     if [ "$option" == "1" ]; then 
