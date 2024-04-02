@@ -1,6 +1,6 @@
 #!/bin/bash 
 
-# Script: lisbon-ops-301n2: Challenge 01.
+# Script: lisbon-ops-301n2: Challenge Class02.
 # Purpose: Append time and date.
 # Why: To know at what time the file was copied.
 

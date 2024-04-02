@@ -1,36 +1,36 @@
-#!/bin/bash 
+#!/bin/bash
 
-# Script: lisbon-ops-301n2: Challenge 02.
-# Purpose: Prompt the user for directory and permissions input, navigate to said directory and print to the screen the contents with the new permissions. .
-# Why: To guarantee that any file created in that directory has the permissions that it needs according to the person who created it.
+# Script: lisbon-ops-301n2: Challenge Class04.
+# Purpose: Create a menu with various options that the user can use.
+# Why: Have a script that can be run for people who don't know the specific commands for certain actions
 
-#Prompting user for directory path (The -p option let's the script prompt the user with a message before reading input)
-read -p "Enter directory path: " directory_path
+clear
+while true; do 
+echo -e "\n"
+echo "1. Hello World!"
+echo "2. Ping Self."
+echo "3. IP Info."
+echo "4. Exit."
+ 
+read -p "Please choose an option:" option
 
-#Prompting user for permissions
+    if [ "$option" == "1" ]; then 
+        echo -e "\n"
+        echo "Hello World!"
 
-read -p "Enter permissions number (ex.777): " permissions
+    elif [ "$option" == "2" ]; then
+        ping -c 4 localhost
 
-#Changing directory to the one specified by user
-#In case the directory can't be found the script exits with a message and a general error
+    elif [ "$option" == "3" ]; then
+        echo -e "\n"
+        ifconfig 
 
-cd "$directory_path" ||{ echo "Directory not found"; exit 1; }
+    elif [ "$option" == "4" ]; then
+        echo "Exit Successful!"
+        exit 0
 
-#Used the find command to search for file type of type "f" so that only normal files are changed and not directories
-
-find . -type f -exec chmod "$permissions" {} +
-
-#Outputting to the screen the actions of the script while changing the permissions of each file
-
-find . -type f | while read -r file ; do 
-    echo "Changing permissions for file: $file"
-    chmod "$permissions" "$file"
-    sleep 1
+    else 
+        echo "Invalid Input!"
+        exit 1
+    fi
 done
-
-#Print to the screen the contents of the directory to show the changes to the permissions
-
-echo "Directory Contents:"
-
-ls -l
-

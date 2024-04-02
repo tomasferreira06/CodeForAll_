@@ -1,5 +1,9 @@
 #!/usr/bin/python3
 
+# Script: lisbon-ops-301n2: Challenge Class08.
+# Purpose: Create a list and use various commands to manipulate it.
+# Why: Know basic commands of Python
+
 #Creating the variable "list" with the 10 elements
 list = ["apple","banana","orange","grape","kiwi","melon","peach","plum","pear","strawberry"]
 
