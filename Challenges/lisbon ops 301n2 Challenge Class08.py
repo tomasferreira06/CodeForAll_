@@ -1,5 +1,3 @@
-#!/usr/bin/python3
-
 # Script: lisbon-ops-301n2: Challenge Class08.
 # Purpose: Create a list and use various commands to manipulate it.
 # Why: Know basic commands of Python
