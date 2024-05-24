@@ -78,12 +78,33 @@ def write_message(message, message_path):
         message_file.write(message)
 
 
+def encrypt_folder(folder_path, message_path):
+    for root, dirs, files in os.walk(folder_path):
+        for file in files:
+            file_path = os.path.join(root, file)
+            encrypt_file(file_path, key)
+
+
+def decrypt_folder(folder_path, key):
+    for root, dirs, files in os.walk(folder_path):
+        for file in files:
+            file_path = os.path.join(root, file)
+            decrypt_file(file_path, key)
+    
+
+def folderkey_path(filepath):
+    message_path = os.path.join(filepath, "folderkey.txt")
+    return message_path
+
+
 # Print the menu
 
 mode = input("""To encrypt a file, enter 1.
 To decrypt a file, enter 2. 
 To encrypt a message, enter 3. 
 To decrypt a message, enter 4. 
+To encrypt a folder, enter 5.
+To decrypt a folder, enter 6.
 Enter your option: """)
 
 if mode == "1":
@@ -95,11 +116,9 @@ if mode == "1":
     encrypt_file(filepath, key)
     write_key(key, key_filepath)
 
-    print("")
-    print(f"The file '{filepath}' has been encrypted and overwritten.")
-    print("")
-    print(f"The key has been saved to '{key_filepath}'")
-    print("")
+    print(f"\nThe file '{filepath}' has been encrypted and overwritten.\n")
+    print(f"The key has been saved to '{key_filepath}'\n")
+    
 
 elif mode == "2":
 
@@ -109,9 +128,8 @@ elif mode == "2":
 
     decrypt_file(filepath, key)
 
-    print("")
-    print(f"The file '{filepath}' has been decrypted and overwritten")
-    print("")
+    print(f"\nThe file '{filepath}' has been decrypted and overwritten\n")
+    
 
 elif mode == "3":
     
@@ -119,7 +137,7 @@ elif mode == "3":
     dir_path = input("Provide the directory where the encrypted string and key will be saved: ")
 
     if not os.path.isdir(dir_path):
-        print("Invalid directory path. Please provide a valid path:")
+        print("\nInvalid directory path.\n")
 
     else:
         key = generate_key()
@@ -130,13 +148,11 @@ elif mode == "3":
         write_message(encrypted_message, dir_message)
         write_key(key, key_filepath)
 
-    print("")
-    print(f"Encrypted message: {encrypted_message.decode('utf-8')}")
-    print("")
-    print(f"The encrypted string has been saved to: {dir_message}")
-    print(f"The key has been saved to: {key_filepath}")
-    print("")
-    
+    print(f"\nEncrypted message: {encrypted_message.decode('utf-8')}\n")
+    print(f"The encrypted string has been saved to: {dir_message}\n")
+    print(f"The key has been saved to: {key_filepath}\n")
+
+
 elif mode == "4":
 
     encrypted_message = input("Provide the ciphertext string: ")
@@ -144,11 +160,45 @@ elif mode == "4":
     key = load_key(key_filepath)
     decrypted_message = decrypt_message(encrypted_message, key)
 
-    print("")
-    print(f"Decrypted message: {decrypted_message}")
-    print("")
+    print(f"\nDecrypted message: {decrypted_message}\n")
+    
+
+elif mode == "5":
+
+    folder_path = input("Provide the path to the folder: ")
+    key_filepath = input("Provide the directory where the key will be saved: ")
+
+    if not os.path.isdir(key_filepath and folder_path):
+        print("\nInvalid directory path!\nInvalid directory to save key!\n")
+
+    else:
+
+        key = generate_key()
+        encrypt_folder(folder_path, key)
+        key_path = folderkey_path(key_filepath)
+
+        write_key(key, key_path)
+
+        print(f"\nThe folder '{folder_path}' and its contents have been encrypted.\n")
+        print(f"The key has been saved to '{key_filepath}'\n")
+
+
+elif mode == "6":
+    folder_path = input("Provide the path to the folder: ")
+    key_filepath = input("Provide the path to the key file: ")
+
+    if not os.path.isdir(key_filepath and folder_path):
+        print("\nInvalid directory path!\nInvalid directory to save the key!\n")
+
+    else: 
+
+        key = load_key(key_filepath)
+        decrypt_folder(folder_path, key)
+
+        print(f"\nThe folder '{folder_path}' and its contents have been decrypted.\n")
+
 
 else:
-    print("Wrong input! Please try again.")
+    print("Wrong input! Please try again.\n")
 
 
