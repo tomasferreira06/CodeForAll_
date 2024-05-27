@@ -71,7 +71,7 @@ def key_file(filepath):
     dir_name, base_name = os.path.split(filepath)
     key_filename = f"key{base_name}"
     key_filepath = os.path.join(dir_name, key_filename)
-    return key_filepath
+    return key_filepath, key_filename
 
 # Defines the path to save the encrypted message/string
 def message_path(filepath):
@@ -130,8 +130,12 @@ def set_wallpaper():
     ctypes.windll.user32.SystemParametersInfoW(20, 0, local_path, 3)
 
 
+while True:
+    # Clear the terminal
+    os.system('cls' if os.name == 'nt' else 'clear')
+
 # Print the menu
-mode = input("""To encrypt a file, enter 1.
+    mode = input("""To encrypt a file, enter 1.
 To decrypt a file, enter 2. 
 To encrypt a message, enter 3. 
 To decrypt a message, enter 4. 
@@ -140,99 +144,121 @@ To decrypt a folder, enter 6.
 To simulate ransomware, enter 7.
 Enter your option: """)
 
-if mode == "1":
+    if mode == "1":
 
-    filepath = input("Provide a path to the file: ")
-    key = generate_key()
-    key_filepath = key_file(filepath)
+        os.system('cls' if os.name == 'nt' else 'clear')
 
-    encrypt_file(filepath, key)
-    write_key(key, key_filepath)
-
-    print(f"\nThe file '{filepath}' has been encrypted and overwritten.\n")
-    print(f"The key has been saved to '{key_filepath}'\n")
-    
-elif mode == "2":
-
-    filepath = input("Provide a path to the file:")
-    key_filepath = input("Provide the path to the key file: ")
-    key = load_key(key_filepath)
-
-    decrypt_file(filepath, key)
-
-    print(f"\nThe file '{filepath}' has been decrypted and overwritten\n")
-    
-elif mode == "3":
-    
-    message = input("Provide the cleartext string: ")
-    dir_path = input("Provide the directory where the encrypted string and key will be saved: ")
-
-    if not os.path.isdir(dir_path):
-        print("\nInvalid directory path.\n")
-
-    else:
+        filepath = input("Provide a path to the file: ")
         key = generate_key()
-        encrypted_message = encrypt_message(message, key)
-        dir_message = message_path(dir_path)
-        key_filepath = key_file(dir_message)
-        
-        write_message(encrypted_message, dir_message)
+        key_filepath = key_file(filepath)
+
+        encrypt_file(filepath, key)
         write_key(key, key_filepath)
 
-    print(f"\nEncrypted message: {encrypted_message.decode('utf-8')}\n")
-    print(f"The encrypted string has been saved to: {dir_message}\n")
-    print(f"The key has been saved to: {key_filepath}\n")
+        print(f"\nThe file '{filepath}' has been encrypted and overwritten.\n")
+        print(f"The key has been saved to '{key_filepath}'\n")
+        break
 
-elif mode == "4":
+    elif mode == "2":
 
-    encrypted_message = input("Provide the ciphertext string: ")
-    key_filepath = input("Provide the path to the key file: ")
-    key = load_key(key_filepath)
-    decrypted_message = decrypt_message(encrypted_message, key)
+        os.system('cls' if os.name == 'nt' else 'clear')
 
-    print(f"\nDecrypted message: {decrypted_message}\n")
+        filepath = input("Provide a path to the file:")
+        key_filepath = input("Provide the path to the key file: ")
+        key = load_key(key_filepath)
 
-elif mode == "5":
+        decrypt_file(filepath, key)
 
-    folder_path = input("Provide the path to the folder: ")
-    key_filepath = input("Provide the directory where the key will be saved: ")
+        print(f"\nThe file '{filepath}' has been decrypted and overwritten\n")
+        break
 
-    if not os.path.isdir(key_filepath and folder_path):
-        print("\nInvalid directory path!\nInvalid directory to save key!\n")
+    elif mode == "3":
+        
+        os.system('cls' if os.name == 'nt' else 'clear')
+
+        message = input("Provide the cleartext string: ")
+        dir_path = input("Provide the directory where the encrypted string and key will be saved: ")
+
+        if not os.path.isdir(dir_path):
+            print("\nInvalid directory path.\n")
+
+        else:
+            key = generate_key()
+            encrypted_message = encrypt_message(message, key)
+            dir_message = message_path(dir_path)
+            key_filepath = key_file(dir_message)
+            
+            write_message(encrypted_message, dir_message)
+            write_key(key, key_filepath)
+
+            print(f"\nEncrypted message: {encrypted_message.decode('utf-8')}\n")
+            print(f"The encrypted string has been saved to: {dir_message}\n")
+            print(f"The key has been saved to: {key_filepath}\n")
+        break
+
+    elif mode == "4":
+
+        os.system('cls' if os.name == 'nt' else 'clear')
+
+        encrypted_message = input("Provide the ciphertext string: ")
+        key_filepath = input("Provide the path to the key file: ")
+        key = load_key(key_filepath)
+        decrypted_message = decrypt_message(encrypted_message, key)
+
+        print(f"\nDecrypted message: {decrypted_message}\n")
+        break
+
+    elif mode == "5":
+
+        os.system('cls' if os.name == 'nt' else 'clear')
+
+        folder_path = input("Provide the path to the folder: ")
+        key_filepath = input("Provide the directory where the key will be saved: ")
+
+        if not os.path.isdir(key_filepath and folder_path):
+            print("\nInvalid directory path!\nInvalid directory to save key!\n")
+
+        else:
+
+            key = generate_key()
+            encrypt_folder(folder_path, key)
+            key_path = folderkey_path(key_filepath)
+
+            write_key(key, key_path)
+
+            print(f"\nThe folder '{folder_path}' and its contents have been encrypted.\n")
+            print(f"The key has been saved to '{key_filepath}'\n")
+        break
+
+    elif mode == "6":
+
+        os.system('cls' if os.name == 'nt' else 'clear')
+
+        folder_path = input("Provide the path to the folder: ")
+        key_filepath = input("Provide the path to the key file: ")
+
+        if not os.path.isdir(key_filepath and folder_path):
+            print("\nInvalid directory path!\nInvalid directory to save the key!\n")
+
+        else: 
+
+            key = load_key(key_filepath)
+            decrypt_folder(folder_path, key)
+
+            print(f"\nThe folder '{folder_path}' and its contents have been decrypted.\n")
+        break
+
+    elif mode == "7":
+
+        os.system('cls' if os.name == 'nt' else 'clear')
+        
+        set_wallpaper()
+        show_popup()
+
+        print("\nRansomware simulation complete!\n")
+        break
 
     else:
-
-        key = generate_key()
-        encrypt_folder(folder_path, key)
-        key_path = folderkey_path(key_filepath)
-
-        write_key(key, key_path)
-
-        print(f"\nThe folder '{folder_path}' and its contents have been encrypted.\n")
-        print(f"The key has been saved to '{key_filepath}'\n")
-
-elif mode == "6":
-    folder_path = input("Provide the path to the folder: ")
-    key_filepath = input("Provide the path to the key file: ")
-
-    if not os.path.isdir(key_filepath and folder_path):
-        print("\nInvalid directory path!\nInvalid directory to save the key!\n")
-
-    else: 
-
-        key = load_key(key_filepath)
-        decrypt_folder(folder_path, key)
-
-        print(f"\nThe folder '{folder_path}' and its contents have been decrypted.\n")
-
-elif mode == "7":
-
-    set_wallpaper()
-    show_popup()
-
-    print("\nRansomware simulation complete!\n")
-
-else:
-    print("\nWrong input! Please try again.\n")
-
+        print("\nWrong input! Please try again.\n")
+        input("Press Enter to continue...")
 
