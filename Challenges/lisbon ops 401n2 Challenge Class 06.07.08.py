@@ -71,7 +71,7 @@ def key_file(filepath):
     dir_name, base_name = os.path.split(filepath)
     key_filename = f"key{base_name}"
     key_filepath = os.path.join(dir_name, key_filename)
-    return key_filepath, key_filename
+    return key_filepath
 
 # Defines the path to save the encrypted message/string
 def message_path(filepath):
@@ -129,9 +129,8 @@ def set_wallpaper():
     # Change the desktop wallpaper to the specified image and make it permanent
     ctypes.windll.user32.SystemParametersInfoW(20, 0, local_path, 3)
 
-
 while True:
-    # Clear the terminal
+      # Clear the terminal screen
     os.system('cls' if os.name == 'nt' else 'clear')
 
 # Print the menu
@@ -145,7 +144,7 @@ To simulate ransomware, enter 7.
 Enter your option: """)
 
     if mode == "1":
-
+        
         os.system('cls' if os.name == 'nt' else 'clear')
 
         filepath = input("Provide a path to the file: ")
@@ -260,5 +259,4 @@ Enter your option: """)
 
     else:
         print("\nWrong input! Please try again.\n")
-        input("Press Enter to continue...")
-
+        print("Press Enter to continue...")
