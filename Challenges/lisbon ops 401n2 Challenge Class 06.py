@@ -108,13 +108,16 @@ def download_image(url, local_path):
     else:
         raise Exception(f"Failed to download image from {url}")
 
-
+# Creates pop-up with a message for the user
 def show_popup():
-    wallpaperPath = ""
-    # Change the desktop wallpaper to the specified image
-    ctypes.windll.user32.SystemParametersInfoW(20, 0, wallpaperPath, 0)
+    message = "Your files have been encrypted! To decrypt your files, follow the instructions in the README file."  # Predefined ransomware message
+    # Create a popup window with a ransomware message
+    root = tk.Tk()
+    root.withdraw()  # Hide the main window
+    messagebox.showerror("Ransomware Simulation", message)
 
 
+# Sets the wallpaper for the ransomware simulation
 def set_wallpaper():
     wallpaper_url = "https://image-optimizer.cyberriskalliance.com/unsafe/768x0/https://files.scmagazine.com/wp-content/uploads/2023/10/1020_ransomware.jpg"  # URL of the wallpaper image
     local_path = os.path.join(os.getenv('TEMP'), "wallpaper.jpg")  # Temporary location to save the downloaded image
@@ -126,7 +129,6 @@ def set_wallpaper():
 
    
 # Print the menu
-
 mode = input("""To encrypt a file, enter 1.
 To decrypt a file, enter 2. 
 To encrypt a message, enter 3. 
@@ -228,10 +230,14 @@ elif mode == "6":
 
 
 elif mode == "7":
-    show_popup()
+
     set_wallpaper()
+    show_popup()
+
     print("\nRansomware simulation complete!\n")
+
+
 else:
-    print("Wrong input! Please try again.\n")
+    print("\nWrong input! Please try again.\n")
 
 
