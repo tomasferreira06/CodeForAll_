@@ -4,11 +4,14 @@
 
 from cryptography.fernet import Fernet 
 import os
+import ctypes
+import requests
+import tkinter as tk
+from tkinter import messagebox
 
 # Define Functions  
 
 # This function generates a key and saves it into a file
-
 def generate_key():
     return Fernet.generate_key()
 
@@ -97,6 +100,31 @@ def folderkey_path(filepath):
     return message_path
 
 
+def download_image(url, local_path):
+    response = requests.get(url)
+    if response.status_code == 200:
+        with open(local_path, 'wb') as file:
+            file.write(response.content)
+    else:
+        raise Exception(f"Failed to download image from {url}")
+
+
+def show_popup():
+    wallpaperPath = ""
+    # Change the desktop wallpaper to the specified image
+    ctypes.windll.user32.SystemParametersInfoW(20, 0, wallpaperPath, 0)
+
+
+def set_wallpaper():
+    wallpaper_url = "https://image-optimizer.cyberriskalliance.com/unsafe/768x0/https://files.scmagazine.com/wp-content/uploads/2023/10/1020_ransomware.jpg"  # URL of the wallpaper image
+    local_path = os.path.join(os.getenv('TEMP'), "wallpaper.jpg")  # Temporary location to save the downloaded image
+    
+    download_image(wallpaper_url, local_path)
+    
+    # Change the desktop wallpaper to the specified image and make it permanent
+    ctypes.windll.user32.SystemParametersInfoW(20, 0, local_path, 3)
+
+   
 # Print the menu
 
 mode = input("""To encrypt a file, enter 1.
@@ -105,6 +133,7 @@ To encrypt a message, enter 3.
 To decrypt a message, enter 4. 
 To encrypt a folder, enter 5.
 To decrypt a folder, enter 6.
+To simulate ransomware, enter 7.
 Enter your option: """)
 
 if mode == "1":
@@ -198,6 +227,10 @@ elif mode == "6":
         print(f"\nThe folder '{folder_path}' and its contents have been decrypted.\n")
 
 
+elif mode == "7":
+    show_popup()
+    set_wallpaper()
+    print("\nRansomware simulation complete!\n")
 else:
     print("Wrong input! Please try again.\n")
 
