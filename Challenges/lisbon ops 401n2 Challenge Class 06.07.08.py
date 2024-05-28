@@ -1,16 +1,13 @@
 #!/bin/python3
 
 # Import Libraries
-
 from cryptography.fernet import Fernet 
 import os
 import ctypes
 import requests
 import tkinter as tk
 from tkinter import messagebox
-
-# Define Functions  
-
+  
 # This function generates a key and saves it into a file
 def generate_key():
     return Fernet.generate_key()
