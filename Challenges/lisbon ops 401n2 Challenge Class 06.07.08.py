@@ -255,5 +255,5 @@ Enter your option: """)
         break
 
     else:
-        print("\nWrong input! Please try again.\n")
+        print("Wrong input! Please try again.")
         input("Press Enter to continue..")
