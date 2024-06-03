@@ -256,4 +256,4 @@ Enter your option: """)
 
     else:
         print("\nWrong input! Please try again.\n")
-        print("Press Enter to continue...")
+        input("Press Enter to continue..")
