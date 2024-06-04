@@ -42,36 +42,36 @@ def tcp_port_scan(host, ports):
             print(f"Port {port}: Filtered (no TCP layer)")
 
 
+def scan_host(host, ports):
+
+    print(f"Pinging {host} - please wait...")
+
+    response = sr1(IP(dst=str(host)) / ICMP(), timeout=2, verbose=0)
+
+    if response is None:
+
+        print(f"{host} is down or unresponsive.")
+
+    elif response.haslayer(ICMP):
+
+        if response[ICMP].type == 3 and response[ICMP].code in [1, 2, 3, 9, 10, 13]:
+
+            print(f"{host} is actively blocking ICMP traffic.")
+
+        else:
+
+            print(f"{host} is responding.")
+            tcp_port_scan(host, ports)
+
+
 # Sends ICMP packets to every host in the specified network
-def icmp_ping_sweep(network):
+def scan_network(network, ports):
 
     ip_list = list(ipaddress.IPv4Network(network).hosts())
 
-    active_hosts = 0
-    
     for ip in ip_list:
 
-        print(f"Pinging {ip} - please wait...")
-
-        response = sr1(IP(dst=str(ip))/ICMP(), timeout=2, verbose=0)
-        
-        if response is None:
-
-            print(f"{ip} is down or unresponsive.")
-
-        elif response.haslayer(ICMP):
-
-            if response[ICMP].type == 3 and response[ICMP].code in [1, 2, 3, 9, 10, 13]:
-
-                print(f"{ip} is actively blocking ICMP traffic.")
-
-            else:
-
-                print(f"{ip} is responding.")
-
-                active_hosts += 1
-    
-    print(f"Total active hosts: {active_hosts}")
+        scan_host(str(ip), ports)
 
 
 # Organizes the ports independent of being by range or single ports
@@ -88,6 +88,7 @@ def get_ports(port_input):
             ports.update(range(int(start), int(end) + 1))
 
         else:
+
             ports.add(int(part))
     return sorted(ports)
 
@@ -97,33 +98,31 @@ if __name__ == "__main__":
     
         os.system('cls' if os.name == 'nt' else 'clear')
 
-        print("Select mode:")
-        print("-------------------------")
-        print("1. TCP Port Range Scanner")
-        print("2. ICMP Ping Sweep")
-        print("-------------------------")
-        mode = input("Enter 1 or 2: ")
+        scan_type = input("Enter scan type (host/network): ")
 
-        if mode == '1':
+        if scan_type.lower() == "host":
 
-            target_host = input("Enter the target host IP: ")
+            hosts_input = input("Enter the target host IP (ex. 8.8.8.8): ")
             port_input = input("Enter ports to scan (ex., 22,80,443 or 20-25): ")
-
             target_ports = get_ports(port_input)
-            tcp_port_scan(target_host, target_ports)
+
+            scan_host(hosts_input, target_ports)
             break
 
-        elif mode == '2':
+        elif scan_type.lower() == "network":
 
-            network = input("Enter the network address (ex., 10.10.0.0/24): ")
+            network = input("Enter the target network address (ex., 10.10.0.0/24): ")
+            port_input = input("Enter ports to scan (ex., 22,80,443 or 20-25): ")
+            target_ports = get_ports(port_input)
 
-            icmp_ping_sweep(network)
+            scan_network(network, target_ports)
             break
 
         else:
+            print("Invalid selection. Please enter 'host' or 'network'.")
 
-            print("Invalid selection. Please try again!")
-            input("Press Enter to continue..")
+    print("Scan completed.")
+    
     
 
     
