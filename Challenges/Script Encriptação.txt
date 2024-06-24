@@ -1,0 +1,20 @@
+maneira de ir buscar automaticamente os ficheiros das chaves correspondentes
+
+adicionar quando decripta que o ficheiro da chave é o caminho do ficheiro mais o nome chave
+para tambem nao se sobreporem as chaves e ter mais controlo sobre criacao de ficheiros
+
+alterar prints para apenas mostrar "The file ( é so o nome da pasta e nao o caminho todo) 
+foi encriptado..."
+
+alterar o IF para "matches" 
+
+
+
+
+adicionar forma do 4 ir buscar a string ao ficheiro?
+
+adicionar variavel que guarde input do nome desejado para o ficheiro chave..para mesmo com nomes 
+personalizados conseguir ir buscar a chave..
+
+para opcoes 5 e 6 adicionar maneira de especificar quais extensoes de ficheiro encriptar
+
