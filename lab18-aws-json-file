@@ -1,0 +1,151 @@
+[
+  {
+    "AccountId": "381492026865",
+    "Arn": "arn:aws:guardduty:eu-west-2:381492026865:detector/50c80b9b402b58e6126fa543576a709a/finding/003945854da64dce8bc224410607d0c8",
+    "CreatedAt": "2024-06-14T14:46:24.120Z",
+    "Description": "A Kubernetes API commonly used in Impact tactics invoked from an IP address on a custom threat list GeneratedFindingThreatListName.",
+    "Id": "003945854da64dce8bc224410607d0c8",
+    "Partition": "aws",
+    "Region": "eu-west-2",
+    "Resource": {
+      "AccessKeyDetails": {
+        "AccessKeyId": "GeneratedFindingAccessKeyId",
+        "PrincipalId": "GeneratedFindingPrincipalId",
+        "UserName": "GeneratedFindingUserName",
+        "UserType": "Role"
+      },
+      "EksClusterDetails": {
+        "Name": "GeneratedFindingEKSClusterName",
+        "Arn": "GeneratedFindingEKSClusterArn",
+        "VpcId": "GeneratedFindingEKSClusterVpcId",
+        "Status": "ACTIVE",
+        "Tags": [
+          {
+            "Key": "GeneratedFindingEKSClusterTag1",
+            "Value": "GeneratedFindingEKSClusterTagValue1"
+          },
+          {
+            "Key": "GeneratedFindingEKSClusterTag2",
+            "Value": "GeneratedFindingEKSClusterTagValue2"
+          },
+          {
+            "Key": "GeneratedFindingEKSClusterTag3",
+            "Value": "GeneratedFindingEKSClusterTagValue3"
+          },
+          {
+            "Key": "GeneratedFindingEKSClusterTag4",
+            "Value": "GeneratedFindingEKSClusterTagValue4"
+          }
+        ],
+        "CreatedAt": "2021-10-05T16:13:40.337Z"
+      },
+      "KubernetesDetails": {
+        "KubernetesUserDetails": {
+          "Username": "GeneratedFindingUserName",
+          "Uid": "GeneratedFindingUID",
+          "Groups": [
+            "GeneratedFindingUserGroup1",
+            "GeneratedFindingUserGroup2",
+            "GeneratedFindingUserGroup3",
+            "GeneratedFindingUserGroup4"
+          ],
+          "SessionName": [
+            "GeneratedFindingSessionName1",
+            "GeneratedFindingSessionName2",
+            "GeneratedFindingSessionName3",
+            "GeneratedFindingSessionName4"
+          ]
+        }
+      },
+      "ResourceType": "EKSCluster"
+    },
+    "SchemaVersion": "2.0",
+    "Service": {
+      "Action": {
+        "ActionType": "KUBERNETES_API_CALL",
+        "KubernetesApiCallAction": {
+          "RequestUri": "GeneratedFindingRequestURI",
+          "Verb": "create",
+          "UserAgent": "",
+          "RemoteIpDetails": {
+            "City": {
+              "CityName": "GeneratedFindingCityName"
+            },
+            "Country": {
+              "CountryName": "GeneratedFindingCountryName"
+            },
+            "GeoLocation": {
+              "Lat": 0,
+              "Lon": 0
+            },
+            "IpAddressV4": "198.51.100.0",
+            "IpAddressV6": "1234:5678:90ab:cdef:1234:5678:90ab:cde0",
+            "Organization": {
+              "Asn": "0",
+              "AsnOrg": "GeneratedFindingASNOrg",
+              "Isp": "GeneratedFindingISP",
+              "Org": "GeneratedFindingORG"
+            }
+          },
+          "StatusCode": 201,
+          "Parameters": "GeneratedFindingActionParameters"
+        }
+      },
+      "Evidence": {
+        "ThreatIntelligenceDetails": [
+          {
+            "ThreatListName": "GeneratedFindingThreatListName1",
+            "ThreatNames": [
+              "GeneratedFindingThreatName1",
+              "GeneratedFindingThreatName2",
+              "GeneratedFindingThreatName3",
+              "GeneratedFindingThreatName4"
+            ]
+          },
+          {
+            "ThreatListName": "GeneratedFindingThreatListName2",
+            "ThreatNames": [
+              "GeneratedFindingThreatName1",
+              "GeneratedFindingThreatName2",
+              "GeneratedFindingThreatName3",
+              "GeneratedFindingThreatName4"
+            ]
+          },
+          {
+            "ThreatListName": "GeneratedFindingThreatListName3",
+            "ThreatNames": [
+              "GeneratedFindingThreatName1",
+              "GeneratedFindingThreatName2",
+              "GeneratedFindingThreatName3",
+              "GeneratedFindingThreatName4"
+            ]
+          },
+          {
+            "ThreatListName": "GeneratedFindingThreatListName4",
+            "ThreatNames": [
+              "GeneratedFindingThreatName1",
+              "GeneratedFindingThreatName2",
+              "GeneratedFindingThreatName3",
+              "GeneratedFindingThreatName4"
+            ]
+          }
+        ]
+      },
+      "Archived": false,
+      "Count": 1,
+      "DetectorId": "50c80b9b402b58e6126fa543576a709a",
+      "EventFirstSeen": "2024-06-14T14:46:24.000Z",
+      "EventLastSeen": "2024-06-14T14:46:24.000Z",
+      "ResourceRole": "TARGET",
+      "ServiceName": "guardduty",
+      "AdditionalInfo": {
+        "Value": "{\"threatName\":\"GeneratedFindingThreatName\",\"threatListName\":\"GeneratedFindingThreatListName\",\"sample\":true}",
+        "Type": "default"
+      }
+    },
+    "Severity": 8,
+    "Title": "A Kubernetes API commonly used in Impact tactics invoked from an IP address on a custom threat list.",
+    "Type": "Impact:Kubernetes/MaliciousIPCaller.Custom",
+    "UpdatedAt": "2024-06-14T14:46:24.120Z"
+  }
+]
