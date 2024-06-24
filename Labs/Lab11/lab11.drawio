@@ -1,0 +1,36 @@
+<mxfile host="app.diagrams.net" modified="2024-04-09T18:41:09.011Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36 OPR/107.0.0.0 (Edition std-1)" etag="ETc74_qvp-74SjM13yFY" version="24.2.3" type="device">
+  <diagram name="Page-1" id="QfWE26cKGQhLjjbXWL3N">
+    <mxGraphModel dx="1187" dy="693" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="bOavPWGr8DLVvhWFG1Hc-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="bOavPWGr8DLVvhWFG1Hc-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="427" y="560" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bOavPWGr8DLVvhWFG1Hc-1" value="" style="image;html=1;image=img/lib/clip_art/networking/Router_Icon_128x128.png" vertex="1" parent="1">
+          <mxGeometry x="354" y="675" width="145" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="bOavPWGr8DLVvhWFG1Hc-2" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;PfSense&amp;nbsp;&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 18px;&quot;&gt;WAN:10.0.2.4&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 18px;&quot;&gt;LAN:192.168.1.1&lt;/font&gt;&lt;/div&gt;" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="396.5" y="800" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="bOavPWGr8DLVvhWFG1Hc-11" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="250" y="350" width="364" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="bOavPWGr8DLVvhWFG1Hc-12" value="" style="image;html=1;image=img/lib/clip_art/computers/Server_128x128.png" vertex="1" parent="1">
+          <mxGeometry x="510" y="420" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="bOavPWGr8DLVvhWFG1Hc-13" value="" style="image;html=1;image=img/lib/clip_art/computers/Laptop_128x128.png" vertex="1" parent="1">
+          <mxGeometry x="290" y="420" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="bOavPWGr8DLVvhWFG1Hc-14" value="&lt;span style=&quot;font-size: 18px;&quot;&gt;Windows 10&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-size: 18px;&quot;&gt;192.168.1.101&lt;/span&gt;&lt;/div&gt;" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="290" y="380" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="bOavPWGr8DLVvhWFG1Hc-15" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;Windows Server&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 18px;&quot;&gt;192.168.1.10&lt;/font&gt;&lt;/div&gt;" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="520" y="380" width="60" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
