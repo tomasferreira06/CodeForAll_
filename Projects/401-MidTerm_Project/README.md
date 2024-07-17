@@ -1,6 +1,6 @@
 # Cyberians-MidTerm-Project Code For All 401
 
-Project Objective:
+## Project Objectives:
 
 For this project, Chewy has requested a demonstration of how you'll be able to protect PII and PCI data in the cloud from being exfiltrated. You'll need to implement the following in AWS Cloud to demonstrate to Chewy how you'll prevent their PII and PCI data from falling into the wrong hands:
 
