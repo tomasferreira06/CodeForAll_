@@ -15,4 +15,3 @@ We need to implement some form of network access control that provides a healthy
 
 - Objective: Deploy a RADIUS system that raises a captive portal for new network users and authenticates them using AD credentials.
 
-For this IT project, your primary point of contact will be Carol Danvers, Chief Operations Officer (COO) at NET2GRID. Carol has been a critical contributor and decision-maker during this complex acquisition process, and can provide you with more detailed requirements as your progress through the project.  
