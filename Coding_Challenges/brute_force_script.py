@@ -3,14 +3,9 @@ import time
 import re
 import paramiko
 import zipfile
-import logging
-from logging.handlers import TimedRotatingFileHandler
-from logging.handlers import RotatingFileHandler
+
 
 def file_iteration(file):
-
-    log_file = "logfile.txt"
-    create_rotating_log(log_file)
 
     try:
         with open(file, "r") as password_list:
@@ -24,9 +19,6 @@ def file_iteration(file):
     except FileNotFoundError as msg:
 
         print('File does not exist!')
-        logging.exception(msg)  
-
-    logging.info('Iteration is complete!')
 
 def string_search(phrase, file):
 
@@ -44,7 +36,6 @@ def string_search(phrase, file):
         print("The program will now exit...")
 
         log_file = "test.txt"
-        create_timed_rotating_log(log_file)
         
         sys.exit(0)
 
@@ -156,24 +147,6 @@ def zip_brute_force(zip_filename, password_list_filename):
             except (RuntimeError, zipfile.BadZipFile):
                 print(f"[X] Attempting password: '{password}' - Invalid password!")
     print("Failed to find the correct password.")
-
-def create_timed_rotating_log(path):
-
-    logger = logging.getLogger("Rotating Log")
-    logger.setLevel(logging.INFO)
-
-    handler = TimedRotatingFileHandler(path, when="m", interval=1, backupCount=5)
-                                       
-    logger.addHandler(handler)
-
-def create_rotating_log(path):
-
-    logger = logging.getLogger("Rotating Log")
-    logger.setLevel(logging.INFO)
-
-    handler = RotatingFileHandler(path, maxBytes=20, backupCount=5)
-                                       
-    logger.addHandler(handler)
 
 mode = input("""To iterate through list enter 1.
 To input a string and compare with list enter 2.
